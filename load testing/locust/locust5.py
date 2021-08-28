@@ -3,7 +3,7 @@ from locust import HttpUser, task, between
 
 class MyUser(HttpUser):
     wait_time = between(1,5)
-    host = "https://cx5rbaz5g7.execute-api.us-east-1.amazonaws.com/default/lambdards"
+    host = "http://127.0.0.1:5000"
 
     @task
     def launch_url(self):
@@ -13,9 +13,7 @@ class MyUser(HttpUser):
         n4 = str(random.randint(1, 31))
         n5 = str(random.randint(1, 12))
         n6 = str(random.randint(2020, 2021))
-        ts=[("Location",n1),("Instance",n2),("OS",n3),("day",n4),("month",n5),("year",n6)]
-        features = dict(ts)
-        self.client.post(url="https://cx5rbaz5g7.execute-api.us-east-1.amazonaws.com/default/lambdards",json=
-        features
-        )
+        ts= "http://127.0.0.1:5000/emp/{}/{}/{}/{}/{}/{}".format(n1,n2,n3,n4,n5,n6)
+
+        self.client.get(url=ts)
 
